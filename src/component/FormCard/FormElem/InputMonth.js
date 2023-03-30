@@ -6,7 +6,6 @@ import {
   setValidAction,
   notValidAction,
 } from '../../../state/reducer/reducerCard';
-import classes from './FormElem.module.scss';
 
 import { useSelector } from 'react-redux';
 function InputMonth({ placeholder }) {
