@@ -10,14 +10,22 @@ function CardFront({ placeholder }) {
     state.card.year,
   ]);
 
+  const monthCard = month.length > 1 ? month : '0' + month;
+
+  const yearCard = year.length > 1 ? year : '0' + year;
+
   return (
     <div className={classes.CardFront}>
       <span>{numberCard.length > 0 ? numberCard : placeholder.numberCard}</span>
       <div className={classes.CardNameData}>
-        <span>{name.length > 0 ? name : placeholder.name}</span>
         <span>
-          {month.length > 0 ? month : placeholder.month}/
-          {year.length > 0 ? year : placeholder.year}
+          {name.length > 0
+            ? name.toUpperCase()
+            : placeholder.name.toUpperCase()}
+        </span>
+        <span>
+          {month.length > 0 ? monthCard : placeholder.month}/
+          {year.length > 0 ? yearCard : placeholder.year}
         </span>
       </div>
     </div>

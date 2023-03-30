@@ -6,6 +6,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: baseline;
+  @media screen and (max-width: 720px) {
+    background: url('../../img/bg-main-mobile.png') center no-repeat;
+    background-size: cover;
+    height: 240px;
+  }
 }
 
 .Card {
@@ -18,6 +23,18 @@
   .CardBack {
     top: 380 - 165px;
     left: 30%;
+    &:hover {
+      top: 375 - 165px;
+      left: 27%;
+    }
+    @media screen and (max-width: 720px) {
+      top: 30px;
+      left: 15%;
+      &:hover {
+        top: 25px;
+        left: 18%;
+      }
+    }
     background: url('../../img/bg-card-back.png') center no-repeat;
     display: flex;
     flex-direction: column;
@@ -30,6 +47,19 @@
   .CardFront {
     top: 0;
     left: 20%;
+    z-index: 2;
+    &:hover {
+      top: 5px;
+      left: 25%;
+    }
+    @media screen and (max-width: 720px) {
+      top: 130px;
+      left: 5%;
+      &:hover {
+        top: 125px;
+        left: 3%;
+      }
+    }
 
     background: url('../../img/bg-card-front.png') center no-repeat;
     display: flex;
@@ -59,5 +89,6 @@
     box-shadow: 0 2px 4px 2px #464545;
     border-radius: 10px;
     background-size: cover;
+    transition: top 0.2s linear, left 0.2s linear;
   }
 }

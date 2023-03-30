@@ -9,17 +9,36 @@ function InputMonth({ placeholder }) {
   const dispatch = useDispatch();
   const month = useSelector((state) => state.card.month);
 
-  const changeMonth = (value) => {
-    if (isFinite(value) && !value.includes('.')) {
-      dispatch(changeMonthAction(value));
+  const onInputValid = (input) => {
+    if (isValid(input.value)) {
+      input.style.borderColor = 'green';
+    } else {
+      input.style.borderColor = 'red';
+    }
+  };
+
+  const isValid = (value) => {
+    return !!value;
+  };
+
+  const changeMonth = (input) => {
+    if (
+      isFinite(input.value) &&
+      String(input.value).length <= 2 &&
+      input.value >= 0 &&
+      input.value <= 12
+    ) {
+      onInputValid(input);
+      dispatch(changeMonthAction(input.value));
     }
   };
   return (
     <input
-      onChange={(e) => changeMonth(e.target.value)}
+      onChange={(e) => changeMonth(e.target)}
       placeholder={placeholder}
-      type="number"
+      type="text"
       value={month}
+      required
     />
   );
 }

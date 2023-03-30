@@ -8,24 +8,37 @@ import { useSelector } from 'react-redux';
 function InputYear({ placeholder }) {
   const dispatch = useDispatch();
   const year = useSelector((state) => state.card.year);
+  const yearNow = +String(new Date().getFullYear()).slice(2);
 
-  const changeYear = (value) => {
-    const yearNow = String(new Date().getFullYear()).slice(2);
+  const onInputValid = (input) => {
+    if (isValid(input.value)) {
+      input.style.borderColor = 'green';
+    } else {
+      input.style.borderColor = 'red';
+    }
+  };
+
+  const isValid = (value) => {
+    return yearNow <= value && yearNow + 20 > value;
+  };
+
+  const changeYear = (input) => {
     if (
-      isFinite(value) &&
-      String(value).length <= 2 &&
-      value < +yearNow + 20 &&
-      value > +yearNow - 20
+      isFinite(input.value) &&
+      String(input.value).length <= 2 &&
+      input.value < yearNow + 20
     ) {
-      dispatch(changeYearAction(Math.floor(value)));
+      onInputValid(input);
+      dispatch(changeYearAction(input.value));
     }
   };
   return (
     <input
-      onChange={(e) => changeYear(e.target.value)}
+      onChange={(e) => changeYear(e.target)}
       placeholder={placeholder}
       type="text"
       value={year}
+      required
     />
   );
 }

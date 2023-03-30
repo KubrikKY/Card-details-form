@@ -9,13 +9,26 @@ function InputName({ placeholder }) {
   const dispatch = useDispatch();
   const numberCard = useSelector((state) => state.card.numberCard);
 
-  const changeNumber = (value) => {
+  const onInputValid = (input) => {
+    if (isValid(input.value)) {
+      input.style.borderColor = 'green';
+    } else {
+      input.style.borderColor = 'red';
+    }
+  };
+
+  const isValid = (value) => {
+    return value.length === 20;
+  };
+
+  const changeNumber = (input) => {
+    onInputValid(input);
     if (
-      value.length < 20 &&
-      isFinite(value.replace(/ /g, '')) &&
-      !value.includes('.')
+      input.value.length < 20 &&
+      isFinite(input.value.replace(/ /g, '')) &&
+      !input.value.includes('.')
     ) {
-      const cardNumber = value
+      const cardNumber = input.value
         .split(/(\d{4})/)
         .filter((item) => item !== '')
         .join(' ')
@@ -29,10 +42,11 @@ function InputName({ placeholder }) {
     <label>
       <p>Card Number</p>
       <input
-        onChange={(e) => changeNumber(e.target.value)}
+        onChange={(e) => changeNumber(e.target)}
         placeholder={placeholder}
         type="text"
         value={numberCard}
+        required
       />
     </label>
   );

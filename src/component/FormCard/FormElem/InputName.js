@@ -8,17 +8,31 @@ function InputName({ placeholder }) {
   const dispatch = useDispatch();
   const name = useSelector((state) => state.card.name);
 
-  const changeName = (value) => {
-    dispatch(changeNameAction(value));
+  const onInputValid = (input) => {
+    if (isValid(input.value)) {
+      input.style.borderColor = 'green';
+    } else {
+      input.style.borderColor = 'red';
+    }
+  };
+
+  const isValid = (value) => {
+    return /^[a-z ,.'-]{2,20}$/i.test(value);
+  };
+
+  const changeName = (input) => {
+    onInputValid(input);
+    dispatch(changeNameAction(input.value));
   };
   return (
     <label>
       <p>Cardholder Name</p>
 
       <input
-        onChange={(e) => changeName(e.target.value)}
+        onChange={(e) => changeName(e.target)}
         placeholder={placeholder}
         value={name}
+        required
       />
     </label>
   );
