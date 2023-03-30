@@ -55,7 +55,6 @@ function InputNumber({ placeholder }) {
         placeholder={placeholder}
         type="text"
         value={numberCard}
-        required
       />
       {!valid && <span className={classes.noValid}>Can't be blank</span>}
     </label>

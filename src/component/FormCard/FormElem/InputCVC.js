@@ -46,7 +46,6 @@ function InputYear({ placeholder }) {
         placeholder={placeholder}
         type="text"
         value={CVC}
-        required
       />
       {!valid && <span className={classes.noValid}>Can't be blank</span>}
     </label>

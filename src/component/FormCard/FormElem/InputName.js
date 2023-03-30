@@ -41,7 +41,6 @@ function InputName({ placeholder }) {
         onChange={(e) => changeName(e.target)}
         placeholder={placeholder}
         value={name}
-        required
       />
       {!valid && <span className={classes.noValid}>Can't be blank</span>}
     </label>

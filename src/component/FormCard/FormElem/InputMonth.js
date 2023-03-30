@@ -43,7 +43,6 @@ function InputMonth({ placeholder }) {
       placeholder={placeholder}
       type="text"
       value={month}
-      required
     />
   );
 }

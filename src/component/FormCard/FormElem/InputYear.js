@@ -43,7 +43,6 @@ function InputYear({ placeholder }) {
       placeholder={placeholder}
       type="text"
       value={year}
-      required
     />
   );
 }
