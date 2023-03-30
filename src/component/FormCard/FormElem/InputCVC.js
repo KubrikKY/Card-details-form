@@ -1,19 +1,28 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { changeCVCAction } from '../../../state/reducer/reducerCard';
+import {
+  changeCVCAction,
+  setValidAction,
+  notValidAction,
+} from '../../../state/reducer/reducerCard';
 import classes from './FormElem.module.scss';
 
 import { useSelector } from 'react-redux';
 function InputYear({ placeholder }) {
   const dispatch = useDispatch();
-  const CVC = useSelector((state) => state.card.CVC);
+  const [CVC, valid] = useSelector((state) => [
+    state.card.CVC,
+    state.card.validate.CVC,
+  ]);
 
   const onInputValid = (input) => {
     if (isValid(input.value)) {
-      input.style.borderColor = 'green';
+      input.style.borderColor = '#432257';
+      dispatch(setValidAction('CVC'));
     } else {
       input.style.borderColor = 'red';
+      dispatch(notValidAction('CVC'));
     }
   };
 
@@ -39,6 +48,7 @@ function InputYear({ placeholder }) {
         value={CVC}
         required
       />
+      {!valid && <span className={classes.noValid}>Can't be blank</span>}
     </label>
   );
 }

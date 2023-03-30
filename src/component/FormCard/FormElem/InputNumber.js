@@ -2,18 +2,27 @@ import React from 'react';
 import classes from './FormElem.module.scss';
 
 import { useDispatch } from 'react-redux';
-import { changeNumberAction } from '../../../state/reducer/reducerCard';
+import {
+  changeNumberAction,
+  setValidAction,
+  notValidAction,
+} from '../../../state/reducer/reducerCard';
 
 import { useSelector } from 'react-redux';
-function InputName({ placeholder }) {
+function InputNumber({ placeholder }) {
   const dispatch = useDispatch();
-  const numberCard = useSelector((state) => state.card.numberCard);
+  const [numberCard, valid] = useSelector((state) => [
+    state.card.numberCard,
+    state.card.validate.numberCard,
+  ]);
 
   const onInputValid = (input) => {
     if (isValid(input.value)) {
-      input.style.borderColor = 'green';
+      input.style.borderColor = '#432257';
+      dispatch(setValidAction('numberCard'));
     } else {
       input.style.borderColor = 'red';
+      dispatch(notValidAction('numberCard'));
     }
   };
 
@@ -48,8 +57,9 @@ function InputName({ placeholder }) {
         value={numberCard}
         required
       />
+      {!valid && <span className={classes.noValid}>Can't be blank</span>}
     </label>
   );
 }
 
-export default InputName;
+export default InputNumber;

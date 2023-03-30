@@ -2,7 +2,11 @@ import React from 'react';
 import classes from './FormElem.module.scss';
 
 import { useDispatch } from 'react-redux';
-import { changeYearAction } from '../../../state/reducer/reducerCard';
+import {
+  changeYearAction,
+  setValidAction,
+  notValidAction,
+} from '../../../state/reducer/reducerCard';
 
 import { useSelector } from 'react-redux';
 function InputYear({ placeholder }) {
@@ -12,9 +16,11 @@ function InputYear({ placeholder }) {
 
   const onInputValid = (input) => {
     if (isValid(input.value)) {
-      input.style.borderColor = 'green';
+      input.style.borderColor = '#432257';
+      dispatch(setValidAction('year'));
     } else {
       input.style.borderColor = 'red';
+      dispatch(notValidAction('year'));
     }
   };
 

@@ -34,15 +34,24 @@
     height: 50px;
     color: #fff;
     background: #220930;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.1s linear;
+    transition: opacity 0.3s linear;
+  }
+  .noActive {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .Active {
+    opacity: 0.9;
     &:hover {
       opacity: 1;
     }
+    cursor: pointer;
   }
+
   label {
     margin-bottom: 10px;
+    height: 70px;
     p {
       margin-bottom: 5px;
     }

@@ -1,7 +1,11 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { changeMonthAction } from '../../../state/reducer/reducerCard';
+import {
+  changeMonthAction,
+  setValidAction,
+  notValidAction,
+} from '../../../state/reducer/reducerCard';
 import classes from './FormElem.module.scss';
 
 import { useSelector } from 'react-redux';
@@ -11,14 +15,16 @@ function InputMonth({ placeholder }) {
 
   const onInputValid = (input) => {
     if (isValid(input.value)) {
-      input.style.borderColor = 'green';
+      input.style.borderColor = '#432257';
+      dispatch(setValidAction('month'));
     } else {
       input.style.borderColor = 'red';
+      dispatch(notValidAction('month'));
     }
   };
 
   const isValid = (value) => {
-    return !!value;
+    return value !== '0' && value.length;
   };
 
   const changeMonth = (input) => {
